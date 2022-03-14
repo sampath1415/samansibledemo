@@ -37,7 +37,7 @@
           - docker-ce
           - docker-ce-cli
           - containerd.io
-		  - git
+          - git
 
     - name: install docker compose
       get_url:
@@ -51,10 +51,10 @@
         clone: yes
         update: yes
 		
-	- name: docker compose up
-	  shell: 
-	    cd /var/repos/demo
-		chmod +x /usr/local/bin/docker-compose
-		docker-compose up -d
+   - name: docker compose up
+     shell: 
+       cd /var/repos/demo
+       chmod +x /usr/local/bin/docker-compose
+       docker-compose up -d
 
 	   
