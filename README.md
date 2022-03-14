@@ -7,5 +7,5 @@
   [localhost]
   x.x.x.x (your vm ip)
 5) navigate to samansibledemo and execute the playbook 'ansible-playbook todoapp.yaml'
-6) apt install w3m w3m-img (command line browser to access the application)
+6) apt install w3m w3m-img -y (command line browser to access the application)
 7)  w3m http://0.0.0.0:8000/
