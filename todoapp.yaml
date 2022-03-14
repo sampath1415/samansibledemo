@@ -30,7 +30,7 @@
       apt:
         upgrade: dist
 
-    - name: install packets (2)
+    - name: install packages
       apt:
         name:
           - docker-ce
