@@ -1,0 +1,57 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+          - vim
+          - haveged
+    - name: fetch docker apt key
+      shell: curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+
+    - name: Add docker repository
+      shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu eoan stable"
+
+    - name: Refresh cache
+      apt:
+        update_cache: yes
+
+    - name: Update distro
+      apt:
+        name: "*"
+        state: latest
+
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+
+    - name: install packets (2)
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - git
+
+    - name: install docker compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.27.3/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+ 
+    - name: Clone a github repository
+      git:
+        repo: https://github.com/docker/getting-started.git
+        dest: /var/repos/demo/
+        clone: yes
+        update: yes
+
+    - name: docker compose up
+      shell: |
+        cd /var/repos/demo
+        chmod +x /usr/local/bin/docker-compose
+        docker-compose up -d
